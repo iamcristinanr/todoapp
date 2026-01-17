@@ -8,6 +8,9 @@
           placeholder="Type new todo"
           autofocus
           type="text"
+          [value]="newTask()"
+          (input)="onNewTaskInput($event)"
+          (change)="addTask()"
         />
       </div>
     </header>

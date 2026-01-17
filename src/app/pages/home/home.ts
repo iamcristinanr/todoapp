@@ -14,11 +14,19 @@ export class Home {
     'Crear proyecto'
   ])
 
-  newTask = '';
+  newTask = signal('');
 
   onNewTaskInput(event: Event): void {
       const value = (event.target as HTMLInputElement).value;
-      this.newTask = value;
+      this.newTask.set(value);
   }
-  
+
+  addTask(): void {
+    const value = this.newTask().trim();
+    if (!value) return;
+
+    this.tasks.update(tasks => [...tasks, value]);
+    this.newTask.set('');
+  }
+
 }
