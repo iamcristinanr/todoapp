@@ -1,7 +1,24 @@
-<h1>Hola este es mi primer proyecto de angular</h1>
-<h2>{{welcome}}</h2>
-<ul>
-  @for (task of tasks; track task) {
-    <li>{{ task }}</li>
-  }
-</ul>
+<div class="container">
+  <h1>Hola este es mi primer proyecto de angular</h1>
+  <h2>{{welcome}}</h2>
+  <ul>
+    @for (task of tasks; track task) {
+      <li>{{ task }}</li>
+    }
+  </ul>
+  <hr />
+
+  <h2>Hola, soy {{ name }}, y mi edad es de {{ age }}</h2>
+  <hr>
+  <input type="text" [value] = "name">
+  <hr>
+  <button [disabled] = "disabled" > Click me</button>
+  <hr>
+  <img [src]="person.img" alt="">
+  <hr>
+  <p>person: {{ person.name }}</p>
+  <p>person: {{ person.age }}</p>
+</div>
+<hr>
+<button (dblclick)="clickhandler()"> double click me  </button>
+<input type="text" [value] = "name" (change)="changehandler($event)">
