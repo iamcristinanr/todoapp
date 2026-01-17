@@ -29,4 +29,8 @@ export class Home {
     this.newTask.set('');
   }
 
+  deleteTask(index: number): void {
+  this.tasks.update(tasks => tasks.filter((_, i) => i !== index));
+  }
+
 }

@@ -18,12 +18,12 @@
       <!-- This section should be hidden by default and shown when there are todos -->
       <section class="main">
         <ul class="todo-list" >
-          @for (task of tasks(); track task) {
+          @for (task of tasks(); track $index; let i = $index) {
           <li>
             <div class="view">
               <input class="toggle" type="checkbox" checked />
               <label>{{ task }}</label>
-              <button class="destroy"></button>
+              <button class="destroy" type="button" (click)="deleteTask(i)"></button>
             </div>
             <input class="edit" [value]="task" />
           </li>
