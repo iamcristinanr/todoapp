@@ -2,8 +2,9 @@
   <h1>Hola este es mi primer proyecto de angular</h1>
   <h2>{{welcome}}</h2>
   <ul>
-    @for (task of tasks; track task) {
-      <li>{{ task }}</li>
+    <p> total: {{tasks().length }}</p>
+    @for (task of tasks(); track $index; let i = $index) {
+      <li>{{ i }} - {{ task }}</li>
     }
   </ul>
   <hr />
@@ -22,3 +23,6 @@
 <hr>
 <button (dblclick)="clickhandler()"> double click me  </button>
 <input type="text" [value] = "name" (change)="changehandler($event)">
+<!-- TODO NGN IF -->
+ <!-- ENG TEMPLATE -->
+  <!-- ENG SWIT CASE -->

@@ -1,36 +1,65 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
+import { Task } from '../../models/taskmodel';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
 
-  tasks = signal([
-    'Instalar Angular',
-    'Ver que podemos movernos entre versiones',
-    'Crear proyecto'
+  //TODO OBJETC
+  tasks = signal<Task[]>([
+    {
+      id: 1,
+      title: "Crear proyecto",
+      complete: false
+    },
+    {
+      id: 2,
+      title: "Aprender sintaxis",
+      complete: false
+    },
   ])
 
   newTask = signal('');
 
+  //TODO FORM CONTROL
   onNewTaskInput(event: Event): void {
       const value = (event.target as HTMLInputElement).value;
       this.newTask.set(value);
   }
 
-  addTask(): void {
-    const value = this.newTask().trim();
-    if (!value) return;
+  addTask(title: string): void {
+    const newTask: Task = {
+      id: Date.now(),
+      title,
+      complete: false,
+    };
+    
+    this.tasks.update((prevTasks) => [...prevTasks, newTask]);
 
-    this.tasks.update(tasks => [...tasks, value]);
     this.newTask.set('');
   }
 
   deleteTask(index: number): void {
-  this.tasks.update(tasks => tasks.filter((_, i) => i !== index));
+    this.tasks.update(tasks => tasks.filter((task, position) => position !== index));
   }
 
+  updateTask(index: number) {
+  this.tasks.update((tasks) => {
+    return tasks.map((task, position) => {
+      if (position === index) {
+        return {
+          ...task,
+          complete: !task.complete
+        };
+      }
+      return task;
+    });
+  });
+
+  }
 }
