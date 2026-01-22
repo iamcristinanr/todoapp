@@ -9,20 +9,39 @@
   </ul>
   <hr />
 
-  <h2>Hola, soy {{ name }}, y mi edad es de {{ age }}</h2>
+  <h2>Hola, soy {{ name() }}, y mi edad es de {{ age() }}</h2>
   <hr>
-  <input type="text" [value] = "name">
+  <input type="text" [value] = "name()">
   <hr>
   <button [disabled] = "disabled" > Click me</button>
   <hr>
-  <img [src]="person.img" alt="">
+  <img [src]="person().img" alt="">
   <hr>
-  <p>person: {{ person.name }}</p>
-  <p>person: {{ person.age }}</p>
-</div>
+  <p>person: {{ person().name }}</p>
+  <p>person: {{ person().age }}</p>
+
 <hr>
 <button (dblclick)="clickhandler()"> double click me  </button>
-<input type="text" [value] = "name" (change)="changehandler($event)">
-<!-- TODO NGN IF -->
- <!-- ENG TEMPLATE -->
+<input type="text" [value] = "name()" (change)="changehandler($event)">
+@if (name === name){
+<div> 
+ My content
+</div>
+}
+
+@if (name() === 'Cristina'){
+<div> 
+ My content CRIS
+</div>
+}
+<input type="number" [value]="person().age" (input)="changeAge($event)">
+
+  @if (person().name === 'Cristina' && name() === 'Cristina' && person().age > 18) {
+    <div> 
+      My content CRISobj¬¬
+    </div>
+  } @else {
+    <p>Soy Cristina y soy menor de 18</p>
+  }
+</div>
   <!-- ENG SWIT CASE -->
