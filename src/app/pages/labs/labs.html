@@ -44,4 +44,16 @@
     <p>Soy Cristina y soy menor de 18</p>
   }
 </div>
-  <!-- ENG SWIT CASE -->
+<input type="0" [value]="person().name" (change)="changeName($event)">
+<div>@switch (person().name) {
+  @case ('Cristina') {
+    <p>Hola Cris, bienvenida.</p>
+  }
+  @case ('Juan') {
+    <p>Hola Juan, ¿cómo estás?</p>
+  }
+  @default {
+    <p>Hola desconocido.</p>
+  }
+}
+</div>
