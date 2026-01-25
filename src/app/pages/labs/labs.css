@@ -3,3 +3,13 @@
     display: block;
     background-color: rgb(197, 115, 197);
 }
+.message-error{
+    background-color: red;
+    color: white;
+    opacity: 0;
+    transition: all linear .4s ;
+}
+
+.message-error-show{
+    opacity: 1;
+}

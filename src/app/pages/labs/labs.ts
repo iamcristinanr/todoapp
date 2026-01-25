@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 //TODO FORM CONTROL
 @Component({
@@ -33,6 +33,14 @@ export class Labs {
 
   widthCtrl = new FormControl(50, {
     nonNullable: true,
+  });
+
+  nameCtrl = new FormControl('Cristina', {
+    nonNullable: true,
+    validators : [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   });
 
   constructor() {
