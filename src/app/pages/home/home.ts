@@ -1,16 +1,16 @@
 import { Component, Input, signal } from '@angular/core';
 import { Task } from '../../models/taskmodel';
 import { JsonPipe } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [JsonPipe],
+  imports: [JsonPipe, ReactiveFormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
 
-  //TODO OBJETC
   tasks = signal<Task[]>([
     {
       id: 1,
@@ -26,11 +26,24 @@ export class Home {
 
   newTask = signal('');
 
-  //TODO FORM CONTROL
-  onNewTaskInput(event: Event): void {
-      const value = (event.target as HTMLInputElement).value;
-      this.newTask.set(value);
-  }
+  newTaskCtrl =  new FormControl('', {
+    nonNullable: true,
+    
+    validators: [
+      Validators.required,
+    ]
+  });
+
+  onNewTaskInput() {
+      if (this.newTaskCtrl.valid){
+      const value = this.newTaskCtrl.value.trim();
+      if (value !== '') {
+        this.addTask(value);
+        this.newTaskCtrl.setValue('');
+      }
+      
+    }
+  };
 
   addTask(title: string): void {
     const newTask: Task = {
@@ -41,7 +54,6 @@ export class Home {
     
     this.tasks.update((prevTasks) => [...prevTasks, newTask]);
 
-    this.newTask.set('');
   }
 
   deleteTask(index: number): void {
