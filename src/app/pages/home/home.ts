@@ -5,7 +5,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [JsonPipe, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

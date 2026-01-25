@@ -43,7 +43,6 @@
   } @else {
     <p>Soy Cristina y soy menor de 18</p>
   }
-</div>
 <input type="0" [value]="person().name" (change)="changeName($event)">
 <div>@switch (person().name) {
   @case ('Cristina') {
@@ -56,10 +55,28 @@
     <p>Hola desconocido.</p>
   }
 }
-
-//MANEJO DE FORMULARIOS REACTIVOS
+</div>
 <hr>
 <input type="color" [formControl] = "colorCtrl">
 <p>color: {{ colorCtrl.value }}</p>
+
+<!-- apply style svg -->
+<svg width="100" height="100">
+  <g>
+    <rect 
+      x="10" 
+      y="10" 
+      width="80" 
+      height="80" 
+      [attr.fill]="colorCtrl.value" 
+    />
+  </g>
+</svg>
+
+<hr>
+<!-- styles -->
+<input type="number" [formControl] = "widthCtrl">
+<span class="box" [style.width.px] = "widthCtrl.value">  </span>
+
 </div>
 
