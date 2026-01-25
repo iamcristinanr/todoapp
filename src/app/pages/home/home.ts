@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, signal, computed } from '@angular/core';
 import { Task } from '../../models/taskmodel';
 import { JsonPipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class Home {
 
+  
   tasks = signal<Task[]>([
     {
       id: 1,
@@ -26,6 +27,7 @@ export class Home {
 
   newTask = signal('');
 
+  //State type formControl
   newTaskCtrl =  new FormControl('', {
     nonNullable: true,
     
@@ -33,6 +35,24 @@ export class Home {
       Validators.required,
     ]
   });
+
+  //State type filter from other state or signal <ONLY ALLOWS>
+  filter = signal< 'All' | 'Pending' | 'Completed' >('All');
+
+  //everytime change filter or tasks this function will be execute or calculate new state
+  taskbyFilter = computed(() => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+
+    if (filter === 'Pending') {
+      return tasks.filter(task => !task.complete)
+    }
+    if (filter === 'Completed') {
+      return tasks.filter(task => task.complete)
+    }
+
+    return tasks;
+  })
 
   onNewTaskInput() {
       if (this.newTaskCtrl.valid){
@@ -105,6 +125,11 @@ export class Home {
       return task;
     });
   });
+  }
+
+  // <ONLY ALLOWS>
+  changeFilter (filter : 'All' | 'Pending' | 'Completed') {
+    this.filter.set(filter)
   }
 
 

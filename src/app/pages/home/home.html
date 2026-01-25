@@ -22,7 +22,7 @@
       <!-- This section should be hidden by default and shown when there are todos -->
       <section class="main">
         <ul class="todo-list" >
-          @for (task of tasks(); track $index; let i = $index) {
+          @for (task of taskbyFilter(); track $index; let i = $index) {
           <li 
             (dblclick)="updateTaskEditingMode(i)" 
             [class.completed]="task.complete"
@@ -78,9 +78,9 @@
         </span>
       }
       <ul class="filters">
-        <li><a routerLink="/" class="selected">All</a></li>
-        <li><a routerLink="/pending">Pending</a></li>
-        <li><a routerLink="/completed">Completed</a></li>
+        <li><a (click) = "changeFilter('All')" routerLink="/" class="selected">All</a></li>
+        <li><a (click) = "changeFilter('Pending')" routerLink="/pending">Pending</a></li>
+        <li><a (click) = "changeFilter('Completed')" outerLink="/completed">Completed</a></li>
       </ul>
       <button class="clear-completed">Clear completed</button>
     </footer>
