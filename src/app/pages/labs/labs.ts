@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 //TODO FORM CONTROL
 @Component({
   selector: 'app-labs',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './labs.html',
   styleUrl: './labs.css',
 })
@@ -22,30 +22,37 @@ export class Labs {
   disabled = "false";
   img = 'https://media.istockphoto.com/id/1455446060/es/vector/garabatos-de-gatos-planos-divertidos-gatos-de-piel-y-gatitos-mascotas-lindas-personajes.jpg?s=1024x1024&w=is&k=20&c=d9u6NP89ZhojR6jkmSKtGFrXzeCCDTYgk3BFwYPNJl4=';
 
-  //TODO SIGNAL
   person = signal({
     name: 'Cristina',
     age: 32,
     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomIGVGOuYrHDMlGwbEKcYemoH5LHS_BV7qg&s',
   })
 
+  colorCtrl = new FormControl();
+
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe(value => {
+      console.log(value)
+    })
+  };
+
   clickhandler(){
     alert('Hola')
   }
 
-  changehandler(event: Event){
+  changehandler(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.name.set(newValue)
   }
 
-  changeAgess(event: Event){
+  changeAgess(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.age.set(parseInt(newValue, 10) || 0);
   }
 
-  changeAge(event: Event){
+  changeAge(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.person.update(prevState => {
@@ -55,7 +62,7 @@ export class Labs {
     });
   }
 
-  changeName(event: Event){
+  changeName(event: Event) {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.person.update(prevState => {
