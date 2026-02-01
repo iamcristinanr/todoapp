@@ -1,13 +1,22 @@
 import { Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 //TODO FORM CONTROL
 @Component({
   selector: 'app-labs',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    NgFor,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault
+  ],
   templateUrl: './labs.html',
   styleUrl: './labs.css',
 })
+
 export class Labs {
 
   welcome = "Hola";
@@ -84,5 +93,17 @@ export class Labs {
       }
     });
   }
+
+  trackByIndex(index: number): number {
+    console.log('Old syntax trackBy running, index:', index);
+    return index;
+  }
+
+  
+//   **Comando para migrar el código a la nueva sintaxis**
+// ng g @angular/core:control-flow
+
+
+
 
 }

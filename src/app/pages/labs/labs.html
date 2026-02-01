@@ -34,6 +34,11 @@
  My content CRIS
 </div>
 }
+  <!-- Example: old sintaxis  *ngIf vs @if -->
+    <p *ngIf="name() === 'Cristina'">
+      Old sintaxisa
+    </p>
+
 <input type="number" [value]="person().age" (input)="changeAge($event)">
 
   @if (person().name === 'Cristina' && name() === 'Cristina' && person().age > 18) {
@@ -88,5 +93,28 @@
 <p>
   <input type="text">
 </p>
+
+<!-- Example: old sintaxis  *ngFor vs @for -->
+<ul>
+  <p>total: {{ tasks().length }}</p>
+  <li *ngFor="let task of tasks(); let i = index; trackBy: trackByIndex">
+    {{ i }} - {{ task }}
+  </li>
+</ul>
+
+<!-- Example: old sintaxis  *ngswitch vs @switch -->
+<div [ngSwitch]="person().name">
+
+  <p *ngSwitchCase="'Cristina'">
+    Hola Cris, bienvenida a la vieja sintaxis.
+  </p>
+
+  <p *ngSwitchCase="'Juan'">
+    Hola Juan, ¿cómo ves la vieja sintaxis?
+  </p>
+
+  <p *ngSwitchDefault>
+    Hola desconocido te saluda la vieja sintaxis.
+  </p>
 </div>
 
