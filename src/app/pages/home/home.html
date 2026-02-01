@@ -67,7 +67,8 @@
       </ul>
     </section>
       <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    @if (taskbyFilter().length > 1){
+    <footer class="footer" >
       @if (taskbyFilter().length > 1) {
         <span class="todo-count">
           <strong>{{ taskbyFilter().length }}</strong> items
@@ -84,6 +85,7 @@
       </ul>
       <button class="clear-completed">Clear completed</button>
     </footer>
+  }
   </div>
 </section>
 

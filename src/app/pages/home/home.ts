@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed } from '@angular/core';
+import { Component, Injector, signal, computed, effect, inject } from '@angular/core';
 import { Task } from '../../models/taskmodel';
 import { JsonPipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,18 +12,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 export class Home {
 
   
-  tasks = signal<Task[]>([
-    {
-      id: 1,
-      title: "Crear proyecto",
-      complete: false
-    },
-    {
-      id: 2,
-      title: "Aprender sintaxis",
-      complete: false
-    },
-  ])
+  tasks = signal<Task[]>([])
 
   newTask = signal('');
 
@@ -35,6 +24,33 @@ export class Home {
       Validators.required,
     ]
   });
+
+  constructor() {
+  }
+
+  //Get state tasks when start app
+  ngOnInit(){
+    const storage = localStorage.getItem('tasks');
+    if (storage) {
+      //deserializer to string of items 
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks);
+    }
+    this.trackTasks();
+  }
+
+  injector = inject(Injector);
+
+  trackTasks () {
+    //effect run with state initial empty array we must run after read storage we must create method trackTasks
+    effect(() => {
+      const tasks = this.tasks();
+      //With this save state but we need get it from start app with init
+      //Not save array directly, only string with JSON
+      console.log(tasks);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, { injector : this.injector});
+  }
 
   //State type filter from other state or signal <ONLY ALLOWS>
   filter = signal< 'All' | 'Pending' | 'Completed' >('All');
