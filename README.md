@@ -28,7 +28,11 @@ ng generate --help
 
 ## Building
 
-To build the project run:
+To build the project run => Compile to de produccion:
+// css exceed limit TODO lear optimize component angular.json
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "9kB"
 
 ```bash
 ng build
